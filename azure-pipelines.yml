@@ -1,16 +1,21 @@
-@@ -0,0 +1,19 @@
 # Starter pipeline
 # Start with a minimal pipeline that you can customize to build and deploy your code.
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
+
 trigger:
-- master
+  - master  # Replace 'master' with your branch name if needed
+
 pool:
-  vmImage: ubuntu-latest
+  vmImage: 'ubuntu-latest'  # Use the latest Ubuntu image for the agent
+
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+  # Step 1: Run a one-line script
+  - script: echo "Hello, world!"
+    displayName: 'Run a one-line script'
+
+  # Step 2: Run a multi-line script
+  - script: |
+      echo "Add other tasks to build, test, and deploy your project."
+      echo "See https://aka.ms/yaml"
+    displayName: 'Run a multi-line script'
