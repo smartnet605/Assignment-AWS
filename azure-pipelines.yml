@@ -9,13 +9,13 @@ variables:
 
 steps:
 # 1. Checkout the repository
-- task: Checkout@1
+- checkout: self
   displayName: 'Checkout Code'
 
 # 2. Install Node.js
-- task: UseNode@2
+- task: NodeTool@0
   inputs:
-    version: '$(nodeVersion)'
+    versionSpec: '$(nodeVersion)'
   displayName: 'Set up Node.js'
 
 # 3. Install dependencies
@@ -26,3 +26,4 @@ steps:
 # 4. Run the application
 - script: |
     node main.js
+  displayName: 'Run Application'
