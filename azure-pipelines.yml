@@ -1,13 +1,10 @@
 trigger:
-- master  # Replace with your branch name 
+- main  # Replace with your branch name
 
 pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  # Replace with your App Service name and Azure subscription details
-  azureSubscription: '<YOUR-AZURE-SUBSCRIPTION>'
-  appName: '<YOUR-APP-SERVICE-NAME>'
   nodeVersion: '16.x'
 
 steps:
@@ -22,36 +19,7 @@ steps:
     npm install
   displayName: 'Install Dependencies'
 
-# 3. Run tests (optional)
+# 3. Run the application
 - script: |
-    npm test
-  displayName: 'Run Tests'
-
-# 4. Build the application
-- script: |
-    npm run build
-  displayName: 'Build Application'
-
-# 5. Archive build artifacts
-- task: ArchiveFiles@2
-  inputs:
-    rootFolderOrFile: '$(Build.SourcesDirectory)'
-    includeRootFolder: false
-    archiveType: 'zip'
-    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-  displayName: 'Archive Build Artifacts'
-
-# 6. Publish build artifacts
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'drop'
-  displayName: 'Publish Build Artifacts'
-
-# 7. Deploy to Azure App Service
-- task: AzureWebApp@1
-  inputs:
-    azureSubscription: '$(azureSubscription)'
-    appName: '$(appName)'
-    package: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-  displayName: 'Deploy to Azure App Service'
+    node main.js
+  displayName: 'Run Node.js Application'
