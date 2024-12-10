@@ -1,25 +1,29 @@
 trigger:
-- main  # Replace with your branch name
+- master  # Replace with your branch name
 
 pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  nodeVersion: '16.x'
+  nodeVersion: '16.x'  # Specify your Node.js version
 
 steps:
-# 1. Install Node.js
+# 1. Checkout the repository
+- task: Checkout@1
+  displayName: 'Checkout Code'
+
+# 2. Install Node.js
 - task: UseNode@2
   inputs:
     version: '$(nodeVersion)'
   displayName: 'Set up Node.js'
 
-# 2. Install dependencies
+# 3. Install dependencies
 - script: |
     npm install
   displayName: 'Install Dependencies'
 
-# 3. Run the application
+# 4. Run the application
 - script: |
     node main.js
   displayName: 'Run Node.js Application'
