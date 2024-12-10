@@ -26,4 +26,3 @@ steps:
 # 4. Run the application
 - script: |
     node main.js
-  displayName: 'Run Node.js Application'
